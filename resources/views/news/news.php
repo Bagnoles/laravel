@@ -8,9 +8,14 @@
     <title>Новости</title>
 </head>
 <body>
-<?php
-include_once "header.php";
-?>
-<p>Здесь будет список новостей</p>
+<?php include_once "header.php"; ?>
+<h3>Новости по категориям</h3>
+
+<ul>
+    <?php foreach ($categories as $category): ?>
+    <li><a href="/news/<?=$category['id']?>"><?=$category['name']?></a></li>
+    <?php endforeach;?>
+</ul>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,6 +10,12 @@
 <body>
 <?php include_once "header.php"; ?>
 
-<p>Здесь будет информация о проекте</p>
+<h3><?=$news['title']?></h3>
+
+<p><?=$news['text']?></p>
+
+<br>
+<a href="/news/<?=$category['id']?>">Вернуться назад в категорию</a>
+
 </body>
 </html>

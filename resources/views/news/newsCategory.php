@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,6 +10,11 @@
 <body>
 <?php include_once "header.php"; ?>
 
-<p>Здесь будет информация о проекте</p>
+<h3>Список новостей</h3>
+
+<?php foreach ($news as $item): ?>
+<a href="/news/<?=$item['category_id']?>/<?=$item['id']?>"><?=$item['title']?></a> <br>
+<?php endforeach;?>
+
 </body>
 </html>

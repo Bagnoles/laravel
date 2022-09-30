@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
+Route::get('/', [IndexController::class, 'main']);
+
+Route::get('/info', [IndexController::class, 'showInfo']);
+
+Route::prefix('/news')->group(function () {
+    Route::get('/', [NewsController::class, 'showCategories']);
+    Route::get('/add', [NewsController::class, 'renderAddForm']);
+    Route::get('/{categoryId}', [NewsController::class, 'showNewsOnCategory']);
+    Route::get('/{categoryId}/{newsId}', [NewsController::class, 'showOneNews']);
 });
 
-Route::get('/info', function () {
-    return view('info');
-});
-
-Route::get('/news', function () {
-    return view('news');
-});
+Route::get('/login', [UserController::class, 'index']);

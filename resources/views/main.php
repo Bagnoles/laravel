@@ -8,9 +8,7 @@
     <title>Новости</title>
 </head>
 <body>
-<?php
-include_once "header.php";
-?>
+<?php include_once "header.php"; ?>
 <p>Добро пожаловать на наш портал новостей!</p>
 </body>
 </html>
