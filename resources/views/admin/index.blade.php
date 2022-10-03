@@ -1,14 +1,13 @@
 @extends('layouts.main')
 
 @section('menu')
-    @include('header')
+    @include('admin/header')
 @endsection
 
 @section('content')
-    <p>Информация о проекте</p>
+    <h3>Точка входа админа</h3>
 @endsection
 
 @section('footer')
     @include('footer')
 @endsection
-

@@ -16,7 +16,7 @@
                     <a class="nav-link" href="/news">Новости</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Авторизация</a>
+                    <a class="nav-link" href="/news/add">Добавление новости</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin">Админка</a>

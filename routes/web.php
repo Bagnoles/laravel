@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
@@ -23,8 +24,20 @@ Route::get('/info', [IndexController::class, 'showInfo']);
 Route::prefix('/news')->group(function () {
     Route::get('/', [NewsController::class, 'showCategories']);
     Route::get('/add', [NewsController::class, 'renderAddForm']);
-    Route::get('/{categoryId}', [NewsController::class, 'showNewsOnCategory']);
-    Route::get('/{categoryId}/{newsId}', [NewsController::class, 'showOneNews']);
+    Route::get('/{category}', [NewsController::class, 'showNewsOnCategory']);
+    Route::get('/{category}/{newsId}', [NewsController::class, 'showOneNews']);
 });
 
 Route::get('/login', [UserController::class, 'index']);
+
+Route::get('/admin', [AdminController::class, 'index']);
+
+/*
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+*/

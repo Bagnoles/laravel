@@ -2,32 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function showCategories()
+    public function showCategories(Categories $categories)
     {
-        $categories = News::getCategories();
-        return view('news.news')->with('categories', $categories);
+        return view('news.index')->with('categories', $categories->getCategories());
     }
 
-    public function showNewsOnCategory($categoryId)
+    public function showNewsOnCategory($category, Categories $categories, News $news)
     {
-        $news = News::getNewsOnCategory($categoryId);
-        return view('news.newsCategory')->with('news', $news);
+        $categoryId = $categories->getCategoryIdBySlug($category);
+        return view('news.category',['news' => $news->getNewsOnCategory($categoryId), 'slug' => $category]);
     }
 
-    public function showOneNews($categoryId, $newsId)
+    public function showOneNews($category, $newsId, News $news)
     {
-        $news = News::getOneNews($newsId);
-        $category = News::getCategory($categoryId);
-        return view('news.newsOne', ['news' => $news, 'category' => $category]);
+        return view('news.one', ['news' => $news->getOneNews($newsId), 'slug' => $category]);
     }
 
     public function renderAddForm()
     {
-        return view('news.addNews');
+        return view('admin.addNews');
     }
 }

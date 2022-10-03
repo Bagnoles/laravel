@@ -1,21 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Новости</title>
-</head>
-<body>
-<?php include_once "header.php"; ?>
+@extends('layouts.main')
 
-<h3><?=$news['title']?></h3>
+@section('menu')
+    @include('header')
+@endsection
 
-<p><?=$news['text']?></p>
+@section('content')
+    @if($news)
+        <h3>{{ $news['title'] }}</h3>
+        <p>{{ $news['text'] }}</p>
+    @else
+        <p>Такой новости не существует.</p>
+    @endif
+    <a href="/news/{{ $slug }}">Вернуться назад в категорию</a>
+@endsection
 
-<br>
-<a href="/news/<?=$category['id']?>">Вернуться назад в категорию</a>
-
-</body>
-</html>
+@section('footer')
+    @include('footer')
+@endsection

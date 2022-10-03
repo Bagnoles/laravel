@@ -1,21 +1,21 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Новости</title>
-</head>
-<body>
-<?php include_once "header.php"; ?>
-<h3>Новости по категориям</h3>
+@extends('layouts.main')
 
-<ul>
-    <?php foreach ($categories as $category): ?>
-    <li><a href="/news/<?=$category['id']?>"><?=$category['name']?></a></li>
-    <?php endforeach;?>
-</ul>
+@section('menu')
+    @include('header')
+@endsection
 
-</body>
-</html>
+@section('content')
+    <h3>Категории новостей</h3>
+    <div class="list-group">
+    @forelse ($categories as $category)
+        <a class="list-group-item list-group-item-action" href="/news/{{ $category['slug'] }}">{{  $category['name'] }}</a>
+    @empty
+        <p>Нет никаких новостей</p>
+    @endforelse
+    </div>
+@endsection
+
+@section('footer')
+    @include('footer')
+@endsection
+
