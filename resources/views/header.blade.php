@@ -3,4 +3,4 @@
 <a href="/news">Новости</a>
 
 <a href="/login">Авторизация</a>
-<a href="/news/add">Добавление новости</a>
+<a href="/admin">Админка</a>

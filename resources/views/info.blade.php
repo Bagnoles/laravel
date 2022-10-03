@@ -8,7 +8,7 @@
     <title>Новости</title>
 </head>
 <body>
-<?php include_once "header.php"; ?>
+<?php include_once "header.blade.php"; ?>
 
 <p>Здесь будет информация о проекте</p>
 </body>

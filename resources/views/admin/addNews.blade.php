@@ -8,25 +8,24 @@
     <title>Document</title>
 </head>
 <body>
-<?php include_once "header.php"; ?>
+<?php include_once "header.blade.php"; ?>
 
-<h4>Страница авторизации</h4>
+<h4>Форма добавления новости</h4>
 
 <form action="#">
     <label>
-        <p>Логин:</p>
+        <p>Название новости</p>
         <input type="text">
     </label>
     <label>
-        <p>Пароль:</p>
-        <input type="password">
-    </label> <br>
+        <p>Подробное описание</p>
+        <textarea cols="100" rows="20"></textarea>
+    </label>
     <label>
-        <input type="checkbox">
-        <span>Запомнить меня</span>
+        <p>Краткое описание</p>
+        <textarea cols="30" rows="10"></textarea>
     </label> <br>
     <input type="submit">
 </form>
-
 </body>
 </html>
