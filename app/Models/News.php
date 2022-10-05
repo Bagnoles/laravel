@@ -4,30 +4,9 @@ namespace App\Models;
 
 class News
 {
-    private static $categories = [
-        [
-            'id' => 1,
-            'name' => 'Политика'
-        ],
-        [
-            'id' => 2,
-            'name' => 'Экономика'
-        ],
-        [
-            'id' => 3,
-            'name' => 'Спорт'
-        ],
-        [
-            'id' => 4,
-            'name' => 'Медицина'
-        ],
-        [
-            'id' => 5,
-            'name' => 'Наука'
-        ],
-    ];
 
-    private static $newsList = [
+
+    private array $newsList = [
         [
             'id' => 1,
             'title' => 'В Финляндии вступил в силу запрет на въезд для российских туристов',
@@ -138,25 +117,11 @@ class News
         ]
     ];
 
-    public static function getCategories()
-    {
-        return static::$categories;
-    }
 
-    public static function getCategory($id)
-    {
-        foreach (static::$categories as $category) {
-            if ($category['id'] == $id) {
-                return $category;
-            }
-        }
-        return null;
-    }
-
-    public static function getNewsOnCategory($categoryId)
+    public function getNewsOnCategory($categoryId): array
     {
         $newsOfCategory =[];
-        foreach (static::$newsList as $news) {
+        foreach ($this->newsList as $news) {
             if ($news['category_id'] == $categoryId) {
                 $newsOfCategory[] = $news;
             }
@@ -164,9 +129,9 @@ class News
         return $newsOfCategory;
     }
 
-    public static function getOneNews($id)
+    public function getOneNews($id)
     {
-        foreach (static::$newsList as $news) {
+        foreach ($this->newsList as $news) {
             if ($news['id'] == $id) {
                 return $news;
             }

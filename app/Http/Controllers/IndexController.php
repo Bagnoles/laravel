@@ -8,7 +8,7 @@ class IndexController extends Controller
 {
     public function main()
     {
-        return view('main');
+        return view('index');
     }
 
     public function showInfo()
