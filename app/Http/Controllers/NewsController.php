@@ -16,16 +16,17 @@ class NewsController extends Controller
     public function showNewsOnCategory($category, Categories $categories, News $news)
     {
         $categoryId = $categories->getCategoryIdBySlug($category);
-        return view('news.category',['news' => $news->getNewsOnCategory($categoryId), 'slug' => $category]);
+        return view('news.category',[
+            'news' => $news->getNewsOnCategory($categoryId),
+            'slug' => $category
+        ]);
     }
 
     public function showOneNews($category, $newsId, News $news)
     {
-        return view('news.one', ['news' => $news->getOneNews($newsId), 'slug' => $category]);
-    }
-
-    public function renderAddForm()
-    {
-        return view('admin.addNews');
+        return view('news.one', [
+            'news' => $news->getOneNews($newsId),
+            'slug' => $category
+        ]);
     }
 }

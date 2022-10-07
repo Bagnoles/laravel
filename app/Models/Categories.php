@@ -50,4 +50,16 @@ class Categories
         return $id;
     }
 
+    public function getSlugByCategoryId($id)
+    {
+        $slug = '';
+        foreach ($this->getCategories() as $category) {
+            if ($category['id'] == $id) {
+                $slug = $category['slug'];
+                break;
+            }
+        }
+        return $slug;
+    }
+
 }
