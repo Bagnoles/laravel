@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Storage;
+
 class News
 {
 
-
+/*
     private array $newsList = [
         [
             'id' => 1,
@@ -115,13 +117,17 @@ class News
             'text' => 'Ученые КНР опубликовали в журнале Nature результаты новых исследований, проведённых в рамках миссии "Тяньвэнь-1". Китайский зонд, исследовавший поверхность Марса с прошлого года, помог установить ранее неизвестные факты. С помощью полученных в рамках миссии "Тяньвэнь-1" данных ученые изучили строение слоёв грунта равнины Утопия на глубине до 80-ти метров, и выяснили, что 3 миллиарда лет назад там могло быть наводнение.',
             'category_id' => 5
         ]
-    ];
+    ]; */
 
+    public function getNews()
+    {
+        return json_decode(Storage::disk('local')->get('news.json'), true);
+    }
 
     public function getNewsOnCategory($categoryId): array
     {
         $newsOfCategory =[];
-        foreach ($this->newsList as $news) {
+        foreach ($this->getNews() as $news) {
             if ($news['category_id'] == $categoryId) {
                 $newsOfCategory[] = $news;
             }
@@ -131,7 +137,7 @@ class News
 
     public function getOneNews($id)
     {
-        foreach ($this->newsList as $news) {
+        foreach ($this->getNews() as $news) {
             if ($news['id'] == $id) {
                 return $news;
             }

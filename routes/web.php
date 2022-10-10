@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
@@ -23,7 +24,8 @@ Route::get('/info', [IndexController::class, 'showInfo']);
 
 Route::prefix('/news')->group(function () {
     Route::get('/', [NewsController::class, 'showCategories']);
-    Route::get('/add', [NewsController::class, 'renderAddForm']);
+    Route::match(['get', 'post'],'/add', [AdminController::class, 'renderAddForm']);
+    Route::match(['get', 'post'],'/download', [AdminController::class, 'downloadNews']);
     Route::get('/{category}', [NewsController::class, 'showNewsOnCategory']);
     Route::get('/{category}/{newsId}', [NewsController::class, 'showOneNews']);
 });
