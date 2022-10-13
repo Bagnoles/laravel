@@ -16,7 +16,7 @@
                             <p>Выберите категорию для скачивания</p>
                             <select class="form-select" aria-label="Default select example" name="category_id">
                                 @foreach($categories as $category)
-                                    <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             <button type="submit" class="btn btn-primary mt-3">Скачать</button>

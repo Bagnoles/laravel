@@ -18,6 +18,7 @@ class NewsTest extends TestCase
         $response = $this->get('/news');
 
         $response->assertStatus(200);
+        $response->assertSeeText('Категории новостей');
     }
 
 }
