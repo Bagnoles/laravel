@@ -13,7 +13,7 @@
                         <h3>Категории новостей</h3>
                         <div class="list-group">
                             @forelse ($categories as $category)
-                                <a class="list-group-item list-group-item-action" href="/news/{{ $category['slug'] }}">{{  $category['name'] }}</a>
+                                <a class="list-group-item list-group-item-action" href="/news/{{ $category->slug }}">{{  $category->name }}</a>
                             @empty
                                 <p>Нет никаких новостей</p>
                             @endforelse

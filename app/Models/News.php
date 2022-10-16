@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class News
@@ -119,29 +120,41 @@ class News
         ]
     ]; */
 
-    public function getNews()
+    public function getNews(): array
     {
-        return json_decode(Storage::disk('local')->get('news.json'), true);
+        /* return json_decode(Storage::disk('local')->get('news.json'), true); */
+        return DB::select('SELECT * FROM news');
     }
 
     public function getNewsOnCategory($categoryId): array
     {
-        $newsOfCategory =[];
+       /* $newsOfCategory =[];
         foreach ($this->getNews() as $news) {
             if ($news['category_id'] == $categoryId) {
                 $newsOfCategory[] = $news;
             }
         }
-        return $newsOfCategory;
+        return $newsOfCategory; */
+        return DB::select('SELECT * FROM news WHERE category_id = :category_id', ['category_id' => $categoryId]);
     }
 
     public function getOneNews($id)
     {
-        foreach ($this->getNews() as $news) {
+        /*foreach ($this->getNews() as $news) {
             if ($news['id'] == $id) {
                 return $news;
             }
         }
-        return null;
+        return null; */
+        return DB::selectOne('SELECT * FROM news WHERE id = :id', ['id' => $id]);
+    }
+
+    public function addNews($news): int
+    {
+        return DB::table('news')->insertGetID([
+            'category_id' => $news['category_id'],
+            'title' => $news['title'],
+            'text' => $news['text']
+        ]);
     }
 }

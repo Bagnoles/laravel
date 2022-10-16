@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
+
 class Categories
 {
+    /*
     private array $categories = [
         [
             'id' => 1,
@@ -30,36 +33,38 @@ class Categories
             'name' => 'Наука',
             'slug' => 'science'
         ],
-    ];
+    ]; */
 
     public function getCategories(): array
     {
-        return $this->categories;
+        return DB::select('SELECT * FROM categories');
     }
 
 
     public function getCategoryIdBySlug($slug)
     {
-        $id = null;
+       /* $id = null;
         foreach ($this->getCategories() as $category) {
             if ($category['slug'] == $slug) {
                 $id = $category['id'];
                 break;
             }
-        }
-        return $id;
+        }*/
+        return DB::selectOne('SELECT id FROM categories WHERE slug = :slug', ['slug' => $slug]);
+
     }
 
     public function getSlugByCategoryId($id)
     {
-        $slug = '';
+       /* $slug = '';
         foreach ($this->getCategories() as $category) {
             if ($category['id'] == $id) {
                 $slug = $category['slug'];
                 break;
             }
         }
-        return $slug;
+        return $slug; */
+        return DB::selectOne('SELECT slug FROM categories WHERE id = :id', ['id' => $id]);
     }
 
 }

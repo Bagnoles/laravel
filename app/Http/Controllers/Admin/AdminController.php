@@ -18,14 +18,20 @@ class AdminController extends Controller
     public function renderAddForm(Categories $categories, Request $request, News $news)
     {
         if ($request->isMethod('post')) {
+
             $new = $request->except('_token');
+            $id = $news->addNews($new);
+            $slug = $categories->getSlugByCategoryId($new['category_id']);
+            $path = '/news/' . $slug->slug . '/' . $id;
+            return redirect($path);
+            /*
             $new['id'] = count($news->getNews()) + 1;
             $newsArray = json_decode(Storage::disk('local')->get('news.json'), true);
             $newsArray[] = $new;
             $slug = $categories->getSlugByCategoryId($new['category_id']);
             Storage::disk('local')->put('news.json', json_encode($newsArray, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
             $path = '/news/' . $slug . '/' . $new['id'];
-            return redirect($path);
+            return redirect($path); */
         }
 
         return view('admin.addNews', [

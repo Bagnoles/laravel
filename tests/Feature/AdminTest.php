@@ -18,5 +18,6 @@ class AdminTest extends TestCase
         $response = $this->get('/admin');
 
         $response->assertStatus(200);
+        $response->assertSeeText('Точка входа админа');
     }
 }

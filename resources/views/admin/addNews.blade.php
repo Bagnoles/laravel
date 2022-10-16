@@ -22,7 +22,7 @@
                             <p class="mt-3">Выберите категорию:</p>
                             <select class="form-select" aria-label="Default select example" name="category_id">
                                 @foreach($categories as $category)
-                                    <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             <button type="submit" class="btn btn-primary mt-3">Добавить</button>

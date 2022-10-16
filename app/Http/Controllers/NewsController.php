@@ -17,7 +17,7 @@ class NewsController extends Controller
     {
         $categoryId = $categories->getCategoryIdBySlug($category);
         return view('news.category',[
-            'news' => $news->getNewsOnCategory($categoryId),
+            'news' => $news->getNewsOnCategory($categoryId->id),
             'slug' => $category
         ]);
     }
