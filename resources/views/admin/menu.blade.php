@@ -6,10 +6,10 @@
                     <a class="nav-link" href="/info">О проекте</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/news">Новости</a>
+                    <a class="nav-link" href="/news/list">Список новостей</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/news/add">Добавление новости</a>
+                    <a class="nav-link" href="/news/categories">Список категорий</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/news/download">Скачать новости</a>

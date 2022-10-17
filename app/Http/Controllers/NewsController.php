@@ -8,24 +8,26 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function showCategories(Categories $categories)
+    public function showCategories()
     {
-        return view('news.index')->with('categories', $categories->getCategories());
+        $categories = Categories::all()->toArray();
+        return view('news.index')->with('categories', $categories);
     }
 
-    public function showNewsOnCategory($category, Categories $categories, News $news)
+    public function showNewsOnCategory($categorySlug)
     {
-        $categoryId = $categories->getCategoryIdBySlug($category);
+        $news = Categories::query()->where('slug', $categorySlug)->first()->news;
         return view('news.category',[
-            'news' => $news->getNewsOnCategory($categoryId->id),
-            'slug' => $category
+            'news' => $news,
+            'slug' => $categorySlug
         ]);
     }
 
-    public function showOneNews($category, $newsId, News $news)
+    public function showOneNews($category, $newsId)
     {
+        $news = News::query()->where('id', $newsId)->first();
         return view('news.one', [
-            'news' => $news->getOneNews($newsId),
+            'news' => $news,
             'slug' => $category
         ]);
     }

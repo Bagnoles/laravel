@@ -2,69 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Categories
+
+class Categories extends Model
 {
-    /*
-    private array $categories = [
-        [
-            'id' => 1,
-            'name' => 'Политика',
-            'slug' => 'politics'
-        ],
-        [
-            'id' => 2,
-            'name' => 'Экономика',
-            'slug' => 'economy'
-        ],
-        [
-            'id' => 3,
-            'name' => 'Спорт',
-            'slug' => 'sport'
-        ],
-        [
-            'id' => 4,
-            'name' => 'Медицина',
-            'slug' => 'medicine'
-        ],
-        [
-            'id' => 5,
-            'name' => 'Наука',
-            'slug' => 'science'
-        ],
-    ]; */
-
-    public function getCategories(): array
+    public function addCategory($category): int
     {
-        return DB::select('SELECT * FROM categories');
+        return DB::table('categories')->insertGetID([
+            'name' => $category['name'],
+            'slug' => $category['slug']
+        ]);
     }
 
-
-    public function getCategoryIdBySlug($slug)
+    public function news(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-       /* $id = null;
-        foreach ($this->getCategories() as $category) {
-            if ($category['slug'] == $slug) {
-                $id = $category['id'];
-                break;
-            }
-        }*/
-        return DB::selectOne('SELECT id FROM categories WHERE slug = :slug', ['slug' => $slug]);
-
-    }
-
-    public function getSlugByCategoryId($id)
-    {
-       /* $slug = '';
-        foreach ($this->getCategories() as $category) {
-            if ($category['id'] == $id) {
-                $slug = $category['slug'];
-                break;
-            }
-        }
-        return $slug; */
-        return DB::selectOne('SELECT slug FROM categories WHERE id = :id', ['id' => $id]);
+        return $this->hasMany(News::class, 'category_id', 'id');
     }
 
 }
