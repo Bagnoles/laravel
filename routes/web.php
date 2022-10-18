@@ -26,6 +26,13 @@ Route::prefix('/news')->group(function () {
     Route::get('/', [NewsController::class, 'showCategories']);
     Route::match(['get', 'post'],'/add', [AdminController::class, 'renderAddForm']);
     Route::match(['get', 'post'],'/download', [AdminController::class, 'downloadNews']);
+    Route::match(['get', 'post'],'/addCategory', [AdminController::class, 'addCategory']);
+    Route::match(['get', 'post'],'/editCategory/{categoryId}', [AdminController::class, 'editCategory']);
+    Route::match(['get', 'post'],'/editNews/{newsId}', [AdminController::class, 'editNews']);
+    Route::get('/deleteCategory/{categoryId}', [AdminController::class, 'deleteCategory']);
+    Route::get('/deleteNews/{newsId}', [AdminController::class, 'deleteNews']);
+    Route::get('/list', [AdminController::class, 'showNewsList']);
+    Route::get('/categories', [AdminController::class, 'showCategoriesList']);
     Route::get('/{category}', [NewsController::class, 'showNewsOnCategory']);
     Route::get('/{category}/{newsId}', [NewsController::class, 'showOneNews']);
 });
