@@ -4,6 +4,8 @@
     @include('admin/menu')
 @endsection
 
+
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -11,6 +13,11 @@
                 <div class="card">
                     <div class="card-body">
                         <h3>Форма добавления категории</h3>
+                        @if($errors->any())
+                            @foreach($errors->all() as $error)
+                                <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                            @endforeach
+                        @endif
                         <form action="/news/addCategory" method="post">
                             @csrf
                             <div class="input-group mb-3">
