@@ -11,6 +11,11 @@
                 <div class="card">
                     <div class="card-body">
                         <h3>Редактирование категории</h3>
+                        @if($errors->any())
+                            @foreach($errors->all() as $error)
+                                <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                            @endforeach
+                        @endif
                         <form action="/news/editCategory/{{ $category['id'] }}" method="post">
                             @csrf
                             <div class="input-group mb-3">

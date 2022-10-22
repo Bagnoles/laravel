@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Categories;
 use App\Models\News;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -19,6 +18,11 @@ class AdminController extends Controller
     public function renderAddForm(Request $request, News $news)
     {
         if ($request->isMethod('post')) {
+            $request->validate([
+                'title' => ['required', 'string', 'min:5', 'max:150'],
+                'text' => ['required', 'string', 'min:10', 'max:2000'],
+                'category_id' => ['required', 'exists:categories,id']
+            ]);
             $new = $request->except('_token');
             $id = $news->addNews($new);
             $category = Categories::query()->where('id', $new['category_id'])->first();
@@ -55,7 +59,11 @@ class AdminController extends Controller
 
     public function addCategory(Request $request, Categories $categories)
     {
-        if ($request->isMethod('post')) {
+        if ($request->isMethod('POST')) {
+            $request->validate([
+                'name' => ['required', 'string', 'min:3', 'max:100'],
+                'slug' => ['required', 'string', 'min:3', 'max:100']
+            ]);
             $newCategory = $request->except('_token');
             $categories->addCategory($newCategory);
             return redirect('/news');
@@ -66,6 +74,10 @@ class AdminController extends Controller
 
     public function editCategory($id, Request $request) {
         if ($request->isMethod('post')) {
+            $request->validate([
+                'name' => ['required', 'string', 'min:3', 'max:100'],
+                'slug' => ['required', 'string', 'min:3', 'max:100']
+            ]);
             Categories::query()->where('id', $id)->update([
                 'name' => $request->input('name'),
                 'slug' => $request->input('slug')
@@ -85,6 +97,11 @@ class AdminController extends Controller
     public function editNews($id, Request $request)
     {
         if ($request->isMethod('post')) {
+            $request->validate([
+                'title' => ['required', 'string', 'min:5', 'max:150'],
+                'text' => ['required', 'string', 'min:10', 'max:2000'],
+                'category_id' => ['required', 'exists:categories,id']
+            ]);
             News::query()->where('id', $id)->update([
                 'title' => $request->input('title'),
                 'text' => $request->input('text'),
