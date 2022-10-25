@@ -8,9 +8,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/news">Новости</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Авторизация</a>
-                </li>
+                @if (Auth::user()?->is_admin === true)
                 <li class="nav-item">
                     <a class="nav-link" href="/admin">Админка</a>
                 </li>
+                @endif

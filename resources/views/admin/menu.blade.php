@@ -17,4 +17,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin">Админка</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/users">Список пользователей</a>
+                </li>
+
 
