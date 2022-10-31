@@ -11,6 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3>Точка входа админа</h3>
+                        <a class="btn btn-primary" href="/admin/parser" role="button">Парсинг новостей (спорт)</a>
                     </div>
                 </div>
             </div>

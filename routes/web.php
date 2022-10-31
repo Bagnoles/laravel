@@ -4,9 +4,11 @@
 use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +47,7 @@ Route::group([
 ], function () {
     Route::get('/', [AdminController::class, 'index']);
     Route::get('/users', [UsersController::class, 'showUsers']);
+    Route::get('/parser', [ParserController::class, 'index']);
     Route::get('/users/addAdmin/{id}', [UsersController::class, 'userToAdmin']);
     Route::get('/users/delAdmin/{id}', [UsersController::class, 'userDelFromAdmin']);
 });
@@ -58,5 +61,12 @@ Route::prefix('/news')->group(function () {
 Auth::routes();
 
 Route::get('/home', [IndexController::class, 'main'])->name('home');
+
+Route::group([
+    'middleware' => 'guest'
+], function () {
+    Route::get('/auth/redirect/{network}', [SocialController::class, 'redirect'])->name('social.auth.redirect');
+    Route::get('/auth/callback/{network}', [SocialController::class, 'callback']);
+});
 
 
