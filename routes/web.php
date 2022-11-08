@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ParserController;
+use App\Http\Controllers\Admin\SourceController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NewsController;
@@ -48,6 +49,9 @@ Route::group([
     Route::get('/', [AdminController::class, 'index']);
     Route::get('/users', [UsersController::class, 'showUsers']);
     Route::get('/parser', [ParserController::class, 'index']);
+    Route::get('/sources', [SourceController::class, 'showSources']);
+    Route::get('/deleteSource/{id}', [SourceController::class, 'deleteSource']);
+    Route::match(['get', 'post'],'/sources/add', [SourceController::class, 'addSource']);
     Route::get('/users/addAdmin/{id}', [UsersController::class, 'userToAdmin']);
     Route::get('/users/delAdmin/{id}', [UsersController::class, 'userDelFromAdmin']);
 });

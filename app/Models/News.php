@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 class News extends Model
 {
 
+    protected $fillable = ['title', 'text', 'pubDate', 'category_id'];
+
     public function addNews($news): int
     {
         return DB::table('news')->insertGetID([

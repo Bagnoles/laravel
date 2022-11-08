@@ -3,30 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\Contracts\Parser;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Jobs\JobNewsParsing;
+use App\Models\Source;
+
 
 
 class ParserController extends Controller
 {
-    public function index(Parser $parser)
+    public function index()
     {
-        // politics economics science
 
-        $data = $parser->setLink('https://news.mail.ru/rss/sport/90/')->getParseData();
-
-
-        foreach ($data['news'] as $item) {
-            DB::table('news')->insert([
-                'category_id' => 3,
-                'title' => $item['title'],
-                'text' => $item['description'],
-                'pubDate' => $item['pubDate']
-            ]);
+        foreach (Source::all() as $item) {
+            dispatch(new JobNewsParsing($item['link']));
         }
 
-        return redirect('/news');
+        return '
+        Parsing completed! <br> <a href="/admin">В админку</a>
+        ';
 
     }
 }

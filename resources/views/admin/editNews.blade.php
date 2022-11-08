@@ -22,7 +22,7 @@
                                 <input type="text" name="title" value="{{ $news->title }}" class="form-control" placeholder="Заголовок новости" aria-label="Заголовок новости" aria-describedby="basic-addon2">
                             </div>
                             <div class="input-group">
-                                <textarea name="text" class="form-control" aria-label="Текст новости" placeholder="Текст новости" style="height: 300px">{{ $news->text }}</textarea>
+                                <textarea id="description" name="text" class="form-control" aria-label="Текст новости" placeholder="Текст новости" style="height: 300px">{{ $news->text }}</textarea>
                             </div>
                             <p class="mt-3">Выберите категорию:</p>
                             <select class="form-select" aria-label="Default select example" name="category_id">
@@ -40,7 +40,16 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @endsection
+
 
 @section('footer')
     @include('footer')

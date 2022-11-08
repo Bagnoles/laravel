@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class Categories extends Model
 {
+    protected $fillable = ['slug', 'name'];
+
     public function addCategory($category): int
     {
         return DB::table('categories')->insertGetID([

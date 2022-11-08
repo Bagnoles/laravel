@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('news', function (Blueprint $table) {
-            $table->string('pubDate')->default('some date');
+        Schema::create('sources', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('link');
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('news', function (Blueprint $table) {
-            $table->dropColumn('pubDate');
-        });
+        Schema::dropIfExists('sources');
     }
 };
