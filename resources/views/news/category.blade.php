@@ -17,6 +17,7 @@
                             @empty
                                 <p>В этой категории нет новостей</p>
                             @endforelse
+
                         </div>
                     </div>
                 </div>
@@ -25,6 +26,4 @@
     </div>
 @endsection
 
-@section('footer')
-    @include('footer')
-@endsection
+
